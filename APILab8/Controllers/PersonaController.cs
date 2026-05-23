@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Contactos.Models; // Tu biblioteca de clases externa
+using Contactos.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -16,7 +16,6 @@ namespace APILab8.Controllers
             _connectionString = configuration.GetConnectionString("CadenaContactos")!;
         }
 
-        // GET: api/personas
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -24,7 +23,7 @@ namespace APILab8.Controllers
             return Ok(personas);
         }
 
-        // POST: api/personas
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Persona nuevaPersona)
         {

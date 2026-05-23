@@ -6,9 +6,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Origen de tu app Angular
-              .WithHeaders("X-Api-Key")             // Permite explícitamente tu cabecera
-              .WithMethods("GET", "POST", "OPTIONS"); // Permite los métodos necesarios
+        policy.WithOrigins("http://localhost:4200") 
+              .WithHeaders("X-Api-Key")            
+              .WithMethods("GET", "POST", "OPTIONS"); 
     });
 });
 
@@ -16,7 +16,7 @@ var app = builder.Build();
 
 app.UseCors("PermitirAngular");
 
-// Llama al archivo externo ApiKeyMiddleware de forma limpia
+
 app.UseMiddleware<ApiKeyMiddleware>();
 
 app.UseHttpsRedirection();
