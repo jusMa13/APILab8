@@ -13,9 +13,15 @@ public class ApiKeyMiddleware
         _next = next;
     }
 
-    // Dejamos un ÚNICO método InvokeAsync para que no de el error de "Multiple public Invoke"
     public async Task InvokeAsync(HttpContext context)
     {
+        // NUEVA CONDICIÓN: Si es una petición de control CORS (OPTIONS), se deja pasar directo
+        if (context.Request.Method == "OPTIONS")
+        {
+            await _next(context);
+            return;
+        }
+
         // 1. Revisar si viene la cabecera con la API Key
         if (!context.Request.Headers.TryGetValue(APIKEYNAME, out var extractedApiKey))
         {
